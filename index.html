@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="polo.css">
+
+    <title>Water Polo Game and Shot Clock</title>
+  </head>
+  <body style="background-color: #0B5091; color: #F3B61D;">
+    <div class="container-fluid">
+      <div class="row mt-3">
+        <div class="col-md-9">
+          <div class="inv">GAME CLOCK</div>
+          <div class="clock" id="game-clock">0</div>
+        </div>
+        <div class="col-md-3">
+          <div class="inv" id="clock-head">SHOT</div>
+          <div class="clock" id="shot-clock">0</div>
+        </div>
+      </div>
+      <div class="row my-3">
+        <div class="col text-center">
+          <div class="btn-group btn-group-lg" role="group" aria-label="Basic example" id="main-control-group">
+            <button type="button" class="btn btn-success" id="start" onclick="startClock()">Start Clock</button>
+            <button type="button" class="btn btn-danger" id="stop" onclick="stopClocks()">Stop Clock</button>
+            <button type="button" class="btn btn-warning" id="shot" onclick="resetShotClock()">Reset Shot Clock</button>
+            <button type="button" class="btn btn-secondary" id="timeout-start" onclick="callTimeout()">Time Out</button>
+            <button type="button" class="btn btn-lg btn-secondary" id="timeout-end" onclick="endTimeout()">End Timeout</button>
+            <button type="button" class="btn btn-secondary" id="edit" data-toggle="modal" data-target="#updateClocksModal">Edit Clocks</button>
+            <button type="button" class="btn btn-secondary" id="reset" onclick="resetClocks()">Reset for Next Period</button>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col text-center">
+          <strong><span style="font-size: x-large">Made with &lt;3 by Tate Bosler '19.</span><br>Press <kbd>enter</kbd>/<kbd>return</kbd> to quickly start or stop the clock, or <kbd>T</kbd> to enter or exit a timeout.<br>When the clock is running, press <kbd>space</kbd> to quickly reset the shot clock.</strong>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="updateClocksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Clocks</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <h5>Defaults</h5>
+              <p class="text-muted"><em>Click "Reset for Next Period" to quickly set the clocks to these values (all times <code>m:ss</code>)</em></p>
+              <div class="form-group row">
+                <label for="inputPeriodLength" class="col-sm-3 col-form-label">Period length</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputPeriodLength" placeholder="7:00">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputShotLength" class="col-sm-3 col-form-label">Shot clock length</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputShotLength" placeholder="0:30">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputShotLength" class="col-sm-3 col-form-label">Timeout length</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputTimeoutLength" placeholder="1:00">
+                </div>
+              </div>
+              <h5>Current values</h5>
+              <p class="text-muted"><em>These will override the defaults above (all times <code>m:ss</code>)</em></p>
+              <div class="form-group row">
+                <label for="inputPeriodValue" class="col-sm-3 col-form-label">Set game clock to:</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputPeriodValue" placeholder="7:00">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputShotValue" class="col-sm-3 col-form-label">Set shot clock to:</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputShotValue" placeholder="0:30">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputTimeoutValue" class="col-sm-3 col-form-label">Set timeout clock to:</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputTimeoutValue" placeholder="1:00">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <small class="text-muted">
+              Changes persist until the page is reloaded.
+            </small>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="clock-update-button">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="polo.js"></script>
+  </body>
+</html>

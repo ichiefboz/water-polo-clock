@@ -1,0 +1,31 @@
+.inv {
+  color: #0B5091;
+  background-color: #F3B61D;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+  padding: 0.25rem;
+}
+
+.clock {
+  text-align: center;
+  font-size: 10em;
+  font-family: 'Space Mono', monospace;
+}
+
+.crit {
+  background-color: #F3B61D;
+  color: #0B5091;
+  line-height: 1;
+  font-size: 15em;
+}
+
+.modal-header, .modal-body {
+  color: black;
+}
+
+#main-control-group * {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
