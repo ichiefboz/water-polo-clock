@@ -149,7 +149,7 @@ function stopClocks() {
     $("#edit").show();
     $("#reset").show();
   }
-  $("#start").text('Start '+ timeoutMode ? 'Timeout' : 'Clock');
+  $("#start").text('Start '+ (timeoutMode ? 'Timeout' : 'Clock'));
   clearInterval(gameTick);
   gameTick = null;
   clearInterval(shotTick);
