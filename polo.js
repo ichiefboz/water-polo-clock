@@ -1,4 +1,5 @@
 // EDIT THESE TO CHANGE DEFAULTS
+var halfTimeoutLength = 30;
 var timeoutLength = 60;
 var periodLength = 420; // 7 minutes x 60 seconds = 420 sec
 var shotLength = 30;
@@ -32,6 +33,12 @@ $(document).ready(function() {
           endTimeout();
         } else {
           callTimeout();
+        }
+      } else if (e.keyCode == 72) {
+        if(timeoutMode) {
+          endTimeout();
+        } else {
+          callHalfTimeout();
         }
       }
     }
@@ -101,6 +108,7 @@ function startClock() {
     $("#stop").show();
     $("#shot").hide();
     $("#timeout-end").show();
+    $("#half-timeout-start").hide();
     $("#timeout-start").hide();
     $("#edit").hide();
     $("#reset").hide();
@@ -111,6 +119,7 @@ function startClock() {
     $("#stop").show();
     $("#shot").show();
     $("#timeout-end").hide();
+    $("#half-timeout-start").show();
     $("#timeout-start").show();
     $("#edit").hide();
     $("#reset").hide();
@@ -126,6 +135,7 @@ function stopClocks() {
     $("#stop").hide();
     $("#shot").hide();
     $("#timeout-end").show();
+    $("#half-timeout-start").hide();
     $("#timeout-start").hide();
     $("#edit").hide();
     $("#reset").hide();
@@ -134,10 +144,12 @@ function stopClocks() {
     $("#stop").hide();
     $("#shot").hide();
     $("#timeout-end").hide();
+    $("#half-timeout-start").show();
     $("#timeout-start").show();
     $("#edit").show();
     $("#reset").show();
   }
+  $("#start").text('Start '+ timeoutMode ? 'Timeout' : 'Clock');
   clearInterval(gameTick);
   gameTick = null;
   clearInterval(shotTick);
@@ -234,12 +246,30 @@ function callTimeout() {
   $("#stop").hide();
   $("#shot").hide();
   $("#timeout-end").show();
+  $("#half-timeout-start").hide();
   $("#timeout-start").hide();
   $("#edit").hide();
   $("#reset").hide();
   $("#clock-head").text('TIMEOUT');
   $("#start").text('Start Timeout');
   timeout = timeoutLength;
+  setTimeoutClock();
+  timeoutMode = true;
+}
+
+function callHalfTimeout() {
+  stopClocks();
+  $("#start").show();
+  $("#stop").hide();
+  $("#shot").hide();
+  $("#timeout-end").show();
+  $("#half-timeout-start").hide();
+  $("#timeout-start").hide();
+  $("#edit").hide();
+  $("#reset").hide();
+  $("#clock-head").text('TIMEOUT');
+  $("#start").text('Start Timeout');
+  timeout = halfTimeoutLength;
   setTimeoutClock();
   timeoutMode = true;
 }
@@ -251,6 +281,7 @@ function endTimeout() {
   $("#stop").hide();
   $("#shot").hide();
   $("#timeout-end").hide();
+  $("#half-timeout-start").show();
   $("#timeout-start").show();
   $("#edit").show();
   $("#reset").show();

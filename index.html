@@ -31,7 +31,8 @@
             <button type="button" class="btn btn-success" id="start" onclick="startClock()">Start Clock</button>
             <button type="button" class="btn btn-danger" id="stop" onclick="stopClocks()">Stop Clock</button>
             <button type="button" class="btn btn-warning" id="shot" onclick="resetShotClock()">Reset Shot Clock</button>
-            <button type="button" class="btn btn-secondary" id="timeout-start" onclick="callTimeout()">Time Out</button>
+            <button type="button" class="btn btn-secondary" id="timeout-start" onclick="callHalfTimeout()">Half Timeout</button>
+            <button type="button" class="btn btn-secondary" id="timeout-start" onclick="callTimeout()">Full Timeout</button>
             <button type="button" class="btn btn-lg btn-secondary" id="timeout-end" onclick="endTimeout()">End Timeout</button>
             <button type="button" class="btn btn-secondary" id="edit" data-toggle="modal" data-target="#updateClocksModal">Edit Clocks</button>
             <button type="button" class="btn btn-secondary" id="reset" onclick="resetClocks()">Reset for Next Period</button>
@@ -40,7 +41,7 @@
       </div>
       <div class="row mt-1">
         <div class="col text-center">
-          <strong><span style="font-size: x-large">Made with &lt;3 by Tate Bosler '19.</span><br>Press <kbd>enter</kbd>/<kbd>return</kbd> to quickly start or stop the clock, or <kbd>T</kbd> to enter or exit a timeout.<br>When the clock is running, press <kbd>space</kbd> to quickly reset the shot clock.</strong>
+          <strong><span style="font-size: x-large">Made with &lt;3 by Tate Bosler '19.</span><br>KEYBOARD SHORTCUTS:<br><kbd>enter</kbd>/<kbd>return</kbd> start/stop clock<br><kbd>T</kbd> call FULL timeout<br><kbd>H</kbd> call HALF timeout<br><kbd>space</kbd> reset shot clock (game clock must be running)</strong>
         </div>
       </div>
     </div>
